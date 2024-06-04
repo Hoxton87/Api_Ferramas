@@ -1,0 +1,45 @@
+[
+    {
+        "categoria": "Herramientas Manuales",
+        "productos": [
+            {"nombre": "Martillo", "descripcion": "Martillo de acero", "precio": 25.99, "modelo": "MX123", "marca": "Truper", "codigo": "TRU1234", "stock": 100},
+            {"nombre": "Destornillador", "descripcion": "Destornillador de precisión", "precio": 15.50, "modelo": "DX456", "marca": "Stanley", "codigo": "STN4567", "stock": 200},
+            {"nombre": "Llave", "descripcion": "Llave ajustable", "precio": 30.00, "modelo": "LX789", "marca": "Craftsman", "codigo": "CRA7890", "stock": 150}
+        ]
+    },
+    {
+        "categoria": "Herramientas Eléctricas",
+        "productos": [
+            {"nombre": "Taladro", "descripcion": "Taladro inalámbrico", "precio": 120.99, "modelo": "TL123", "marca": "Bosch", "codigo": "BOS1234", "stock": 50},
+            {"nombre": "Sierra", "descripcion": "Sierra circular", "precio": 200.00, "modelo": "SR456", "marca": "DeWalt", "codigo": "DEW4567", "stock": 30},
+            {"nombre": "Lijadora", "descripcion": "Lijadora orbital", "precio": 75.50, "modelo": "LO789", "marca": "Makita", "codigo": "MAK7890", "stock": 60}
+        ]
+    },
+    {
+        "categoria": "Materiales Básicos",
+        "productos": [
+            {"nombre": "Cemento", "descripcion": "Saco de cemento", "precio": 10.00, "modelo": "CM123", "marca": "CEMEX", "codigo": "CEM1234", "stock": 1000},
+            {"nombre": "Arena", "descripcion": "Saco de arena", "precio": 5.00, "modelo": "AR456", "marca": "ArenaFina", "codigo": "ARE4567", "stock": 500},
+            {"nombre": "Ladrillo", "descripcion": "Ladrillo rojo", "precio": 0.50, "modelo": "LR789", "marca": "Ladrillos S.A.", "codigo": "LAD7890", "stock": 5000}
+        ]
+    },
+    {
+        "categoria": "Acabados",
+        "productos": [
+            {"nombre": "Pintura", "descripcion": "Galón de pintura blanca", "precio": 20.00, "modelo": "PT123", "marca": "Sherwin-Williams", "codigo": "SHE1234", "stock": 100},
+            {"nombre": "Barniz", "descripcion": "Lata de barniz", "precio": 15.00, "modelo": "BN456", "marca": "Rust-Oleum", "codigo": "RUS4567", "stock": 80},
+            {"nombre": "Cerámico", "descripcion": "Caja de cerámicos", "precio": 25.00, "modelo": "CR789", "marca": "Cerámica Italia", "codigo": "CER7890", "stock": 40}
+        ]
+    },
+    {
+        "categoria": "Equipos de Seguridad",
+        "productos": [
+            {"nombre": "Casco", "descripcion": "Casco de seguridad", "precio": 12.00, "modelo": "CS123", "marca": "3M", "codigo": "3M1234", "stock": 100},
+            {"nombre": "Guantes", "descripcion": "Par de guantes", "precio": 5.00, "modelo": "GU456", "marca": "Ansell", "codigo": "ANS4567", "stock": 200},
+            {"nombre": "Lentes de Seguridad", "descripcion": "Lentes de protección", "precio": 8.00, "modelo": "LS789", "marca": "Uvex", "codigo": "UVX7890", "stock": 150},
+            {"nombre": "Tornillos y Anclajes", "descripcion": "Caja de tornillos", "precio": 10.00, "modelo": "TA123", "marca": "Hilti", "codigo": "HIL1234", "stock": 300},
+            {"nombre": "Fijaciones y Adhesivos", "descripcion": "Tubo de adhesivo", "precio": 7.00, "modelo": "FA456", "marca": "Loctite", "codigo": "LOC4567", "stock": 180},
+            {"nombre": "Equipos de Medición", "descripcion": "Cinta métrica", "precio": 6.00, "modelo": "EM789", "marca": "Stanley", "codigo": "STA7890", "stock": 120}
+        ]
+    }
+]

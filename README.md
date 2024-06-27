@@ -16,6 +16,9 @@ pip install django djangorestframework
 ```` 
 ## Cargar Datos desde JSON
 ```
+pip install djangorestframework-simplejwt==5.3.1
+```
+```
 python manage.py load_productos
 ```
 

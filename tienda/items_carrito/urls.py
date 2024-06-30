@@ -1,7 +1,17 @@
-from django.urls import path
-from .views import agregar_al_carrito, comprar_productos
+# productos/urls.py
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import CategoriaViewSet, ProductoViewSet, agregar_al_carrito, CarritoDetailView, comprar_productos
+
+
+
+router = DefaultRouter()
+router.register(r'categorias', CategoriaViewSet, basename='categoria')
+router.register(r'productos', ProductoViewSet)
 
 urlpatterns = [
-    path('agregar/', agregar_al_carrito, name='agregar-al-carrito'),
-    path('comprar/', comprar_productos, name='comprar-productos'),
+    path('', include(router.urls)),
+    path('carrito/agregar/', agregar_al_carrito, name='agregar-al-carrito'),
+    path('carrito/', CarritoDetailView.as_view(), name='carrito-detalle'),
+    path('carrito/comprar/', comprar_productos, name='comprar-productos'),
 ]

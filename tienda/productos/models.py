@@ -8,7 +8,7 @@ class Producto(models.Model):
     modelo = models.CharField(max_length=100)
     marca = models.CharField(max_length=100)
     codigo = models.CharField(max_length=100)
-    stock = models.IntegerField()
+    stock = models.IntegerField(default=0)
     categoria = models.ForeignKey(Categoria, related_name='productos', on_delete=models.CASCADE)
 
     def __str__(self):

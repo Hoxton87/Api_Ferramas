@@ -27,6 +27,9 @@ def agregar_al_carrito(request):
     except Producto.DoesNotExist:
         return Response({'error': 'Producto no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
+    if producto.stock < int(cantidad):
+        return Response({'error': 'Stock insuficiente para el producto'}, status=status.HTTP_400_BAD_REQUEST)
+
     carrito, created = Carrito.objects.get_or_create(user=user, defaults={'created_at': timezone.now()})
 
     item_carrito, created = ItemCarrito.objects.get_or_create(carrito=carrito, producto=producto, defaults={'cantidad': cantidad})
@@ -36,6 +39,7 @@ def agregar_al_carrito(request):
         item_carrito.save()
 
     return Response({'message': 'Producto agregado al carrito'}, status=status.HTTP_200_OK)
+
 
 class CarritoDetailView(generics.RetrieveAPIView):
     queryset = Carrito.objects.all()

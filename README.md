@@ -13,6 +13,7 @@ source venv/bin/activate
 ## Instalar Django y Django REST Framework
 ```
 pip install django djangorestframework
+pip install djangorestframework-simplejwt
 ```` 
 ## Cargar Datos desde JSON
 ```

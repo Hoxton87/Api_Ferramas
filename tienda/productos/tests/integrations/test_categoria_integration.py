@@ -1,14 +1,27 @@
+import os
+os.environ['DJANGO_SETTINGS_MODULE'] = 'tienda.settings'
+import django
+django.setup()
+
 from rest_framework.test import APITestCase
 from rest_framework import status
 from django.urls import reverse
 from productos.models import Categoria
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 
 class CategoriaAPITestCase(APITestCase):
 
     def setUp(self):
-        self.categoria = Categoria.objects.create(nombre="Herramientas Manuales")
-        self.categoria_url = reverse('categoria-detail', args=[self.categoria.id])
+        # Crear un usuario de prueba y obtener el token
+        self.user = User.objects.create_user(username='testuser', password='testpassword')
+        self.token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+
+        # Crear una categoría de prueba
+        self.categoria = Categoria.objects.create(nombre='Herramientas')
         self.categorias_url = reverse('categoria-list')
+        self.categoria_url = reverse('categoria-detail', args=[self.categoria.id])
 
     def test_obtener_todas_las_categorias(self):
         response = self.client.get(self.categorias_url)
@@ -23,7 +36,7 @@ class CategoriaAPITestCase(APITestCase):
         data = {'nombre': 'Herramientas Eléctricas'}
         response = self.client.post(self.categorias_url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(Categoria.objects.count(), 2)
+        self.assertEqual(Categoria.objects.count(), 2)  # Verificar que se haya creado una nueva categoría
         self.assertEqual(Categoria.objects.get(id=response.data['id']).nombre, 'Herramientas Eléctricas')
 
     def test_actualizar_categoria_via_api(self):

@@ -1,22 +1,26 @@
-# productos/views.py
 from rest_framework import viewsets, generics, status
 from .models import Categoria, Producto, ItemCarrito, Carrito
 from .serializers import CategoriaSerializer, ProductoSerializer, CarritoSerializer, ItemCarritoSerializer
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import transaction
+from rest_framework.views import APIView
 
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProductoViewSet(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
+    permission_classes = [IsAuthenticated]
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def agregar_al_carrito(request):
     user = request.user
     producto_id = request.data.get('producto_id')
@@ -40,11 +44,13 @@ def agregar_al_carrito(request):
 class CarritoDetailView(generics.RetrieveAPIView):
     queryset = Carrito.objects.all()
     serializer_class = CarritoSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_object(self):
         return Carrito.objects.get(user=self.request.user)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 @transaction.atomic
 def comprar_productos(request):
     user = request.user

@@ -1,21 +1,20 @@
-import os
-os.environ['DJANGO_SETTINGS_MODULE'] = 'tienda.settings'
-import django
-django.setup()
+import pytest
 from django.test import TestCase
 from productos.models import Categoria
 from django.urls import reverse
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
+from rest_framework.test import APIClient
 
-
+@pytest.mark.django_db
 class CategoriaModelTest(TestCase):
 
     def setUp(self):
         # Crear un usuario de prueba
+        self.client = APIClient()
         self.user = User.objects.create_user(username='testuser', password='testpassword')
         self.token = Token.objects.create(user=self.user)
-        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
 
         # Crear una categoría de prueba
         self.categoria = Categoria.objects.create(nombre='Herramientas')

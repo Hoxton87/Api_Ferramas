@@ -1,15 +1,19 @@
+import pytest
 from django.test import TestCase
 from django.contrib.auth.models import User
 from rest_framework.test import APIClient
 from rest_framework import status
+from rest_framework.authtoken.models import Token
 from productos.models import Producto, Carrito, ItemCarrito, Categoria
 
+@pytest.mark.django_db
 class ComprarProductosTestCase(TestCase):
 
     def setUp(self):
         self.client = APIClient()
         self.user = User.objects.create_user(username='testuser', password='testpassword')
-        self.client.force_authenticate(user=self.user)
+        self.token = Token.objects.create(user=self.user)
+        self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {self.token}')
 
         self.categoria = Categoria.objects.create(nombre='Herramientas')
         self.producto = Producto.objects.create(

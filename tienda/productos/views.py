@@ -1,6 +1,4 @@
 from rest_framework import viewsets, generics, status
-from .models import Categoria, Producto, ItemCarrito, Carrito
-from .serializers import CategoriaSerializer, ProductoSerializer, CarritoSerializer, ItemCarritoSerializer
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -8,6 +6,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import transaction
 from rest_framework.views import APIView
+from .models import Categoria, Producto, ItemCarrito, Carrito
+from .serializers import CategoriaSerializer, ProductoSerializer, CarritoSerializer, ItemCarritoSerializer
 
 class CategoriaViewSet(viewsets.ModelViewSet):
     queryset = Categoria.objects.all()
@@ -72,3 +72,14 @@ def comprar_productos(request):
     carrito.delete()
     
     return Response({'message': 'Compra realizada con éxito', 'total': total}, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def vaciar_carrito(request):
+    try:
+        carrito = Carrito.objects.get(user=request.user)
+        carrito.items.all().delete()
+        carrito.delete()
+        return Response({'message': 'Carrito vaciado correctamente'}, status=status.HTTP_200_OK)
+    except Carrito.DoesNotExist:
+        return Response({'error': 'El carrito no existe'}, status=status.HTTP_400_BAD_REQUEST)

@@ -116,6 +116,28 @@ Key: Authorization
 
 Value: Bearer <tu_token>
 
+## Realizar Test
+
+Categoria Prueba Unitaria
+```
+ python manage.py test categorias.tests.test_categoria_unit
+```
+
+Categoria Prueba de integracion
+```
+python manage.py test categorias.tests.test_categoria_integration
+```
+
+Item Carrito prueba de integracion: 
+
+```
+python manage.py test items_carrito.tests.test_itemcarrito_integration
+```
+
+Item Carrito prueba unitaria: 
+```
+python manage.py test items_carrito.tests.test_itemcarrito_unit
+```
 
 
 
